@@ -9,18 +9,21 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <input id="searchBar" type="text" name="" placeholder="Cerca film o serie tv">
+    <button id="searchButt" type="button" name="avviaRicerca">Cerca</button>
 
+    <div class="obj">
 
+    </div>
 
-    <script id="entry-template" type="text/x-handlebars-template">
-      <div class="entry">
-        <h1>{{title}}</h1>
-        <div class="body">
-          {{orgtitle}}
-        </div>
-        <span>{{lang}}</span>
-        <span>{{voto}}</span>
-      </div>
+    <script id="template" type="text/x-handlebars-template">
+      <ul class="entry">
+        <li><h1>Titolo: {{title}}</h1></li>
+        <li>Titolo originale: {{orgtitle}}</li>
+        <li>Lingua: {{lang}}</li>
+        <li>Voto: {{voto}}</li>
+        {{{img}}}
+      </ul>
     </script>
 
       <script src="action.js"></script>
