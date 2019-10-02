@@ -32,14 +32,15 @@ $("#searchButt").click(function(){
 
 
         var context = {
-          title: ris.title,
-          orgtitle: ris.original_title,
-          lang: ris.original_language,
-          voto: ris.vote_average,
-          img: "<img src='ris.poster_path' >"
+          title: ris[i].title,
+          orgtitle: ris[i].original_title,
+          lang: ris[i].original_language,
+          voto: ris[i].vote_average,
+          img: "<img src='ris[i].poster_path' >"
         };
 
-        obj.append(ris[i].title, "<br>");
+        obj.append(ris[i].title + "<br>" + ris[i].original_title, "<br><br>");
+        obj.append(context);
       };
         var html = template(context);
     },
