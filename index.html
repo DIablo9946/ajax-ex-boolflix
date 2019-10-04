@@ -18,15 +18,27 @@
     </div>
 
     <script id="template" type="text/x-handlebars-template">
-      <ul class="entry">
-        <li>Tipo: {{type}}</li>
-        <li><h2 class="title">Titolo: {{title}}</h2></li>
-        <li class="orgtitle">Titolo originale: {{orgtitle}}</li>
-        <li class="lingua">Lingua: {{{lang}}}</li>
-        <li class="voto">Voto: {{{voto}}}</li>
-        {{{img}}}
-      </ul>
+      <div class="movie">
+        <ul class="entry">
+          <li>Tipo: {{type}}</li>
+          <li><h2 class="title">Titolo: {{title}}</h2></li>
+          <li class="orgtitle">Titolo originale: {{orgtitle}}</li>
+          <li class="lingua">Lingua: {{{lang}}}</li>
+          <li class="voto">Voto: {{{voto}}}</li>
+          {{{img}}}
+        </ul>
+      </div>
       <br>
+    </script>
+
+    <script id="template2" type="text/x-handlebars-template">
+      <div class="movie">
+        <div class="img-wrapper">
+          {{{img}}}
+        </div>
+        <div class="info-wrapper">
+        </div>
+      </div>
     </script>
 
       <script src="action.js"></script>

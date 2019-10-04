@@ -2,6 +2,7 @@
 $(document).ready(function(){
 
 var obj = $(".obj");
+var posterImg = "https://image.tmdb.org/t/p/w185"
 
 $("#searchButt").click(function(){
   console.log("cliccato il bottone");
@@ -23,7 +24,7 @@ $("#searchButt").click(function(){
 
 
       var ris = data.results;
-      printMovies(ris);
+      printAdv("movies", ris);
 
     },
     error : function (){
@@ -45,7 +46,7 @@ $("#searchButt").click(function(){
 
 
       var ris = data.results;
-      printSeries(ris);
+      printAdv("tv", ris);
 
     },
     error : function (){
@@ -60,53 +61,53 @@ $("#searchButt").click(function(){
 
 
 
-function printMovies(ris){
-  for (var i=0; i< ris.length; i++) {
-    var movie = ris[i];
-    var source   = $("#template").html();
-    var template = Handlebars.compile(source);
+// // function printMovies(ris){
+//   for (var i=0; i< ris.length; i++) {
+//     var movie = ris[i];
+//     var source   = $("#template").html();
+//     var template = Handlebars.compile(source);
+//
+//     var context = {
+//       type: "Film",
+//       title: movie.title,
+//       orgtitle: movie.original_title,
+//       lang: getFlag(movie.original_language),
+//       // lang: movie.original_language,
+//       voto: getStarFromRates(movie.vote_average),
+//       // voto: movie.vote_average,
+//       // img: "<img src='" + movie.poster_path + "' >"
+//     };
+//
+//     var html = template(context);
+//
+//     obj.append(html);
+//   }
+// };
 
-    var context = {
-      type: "Film",
-      title: movie.title,
-      orgtitle: movie.original_title,
-      lang: getFlag(movie.original_language),
-      // lang: movie.original_language,
-      voto: getStarFromRates(movie.vote_average),
-      // voto: movie.vote_average,
-      // img: "<img src='" + movie.poster_path + "' >"
-    };
-
-    var html = template(context);
-
-    obj.append(html);
-  }
-};
-
-
-function printSeries(ris){
-  for (var i=0; i< ris.length; i++) {
-    var movie = ris[i];
-    var source   = $("#template").html();
-    var template = Handlebars.compile(source);
-
-    var context = {
-      type: "Serie Tv",
-      title: movie.name,
-      orgtitle: movie.original_name,
-      lang: getFlag(movie.original_language),
-      // lang: movie.original_language,
-      voto: getStarFromRates(movie.vote_average),
-      // voto: movie.vote_average,
-      // img: "<img src='" + movie.poster_path + "' >"
-    };
-
-    var html = template(context);
-
-    obj.append(html);
-  }
-
-};
+//
+// function printSeries(ris){
+//   for (var i=0; i< ris.length; i++) {
+//     var movie = ris[i];
+//     var source   = $("#template").html();
+//     var template = Handlebars.compile(source);
+//
+//     var context = {
+//       type: "Serie Tv",
+//       title: movie.name,
+//       orgtitle: movie.original_name,
+//       lang: getFlag(movie.original_language),
+//       // lang: movie.original_language,
+//       voto: getStarFromRates(movie.vote_average),
+//       // voto: movie.vote_average,
+//       // img: "<img src='" + movie.poster_path + "' >"
+//     };
+//
+//     var html = template(context);
+//
+//     obj.append(html);
+//   }
+//
+// };
 
 console.log("Sono nel documento");
 
@@ -149,5 +150,100 @@ function getFlag(lang){
   };
   return flag;
 };
+
+
+function getPosterImg(url){
+
+  // https://www.image.tmdb.org/t/p/w185/
+  var imgTag = "";
+  if (url){
+    imgTag = "<img src='" + posterImg + url + "'>"
+  } else {
+
+  }
+
+  return imgTag;
+};
+
+
+// Sostituisco le due funzioni print per una sola
+
+function printBoth(type, ris){
+
+
+
+  for (var i=0; i< ris.length; i++) {
+    var movie = ris[i];
+    var source   = $("#template").html();
+    var template = Handlebars.compile(source);
+
+    title= " ";
+    originalTitle= " ";
+
+    if (type == "movies") {
+      title = movie.title,
+      originalTitle = movie.original_title;
+    } else {
+      title = movie.name,
+      originalTitle = movie.original_name;
+    };
+
+    var context = {
+      type: type,
+      title: title,
+      orgtitle: originalTitle,
+      lang: getFlag(movie.original_language),
+      // lang: movie.original_language,
+      voto: getStarFromRates(movie.vote_average),
+      // voto: movie.vote_average,
+      // img: "<img src='" + movie.poster_path + "' >"
+      img : getPosterImg(movie.poster_path)
+    };
+
+    var html = template(context);
+
+    obj.append(html);
+  };
+};
+
+
+
+function printAdv (type, ris){
+
+  for (var i=0; i< ris.length; i++) {
+    var movie = ris[i];
+    var source   = $("#template2").html();
+    var template = Handlebars.compile(source);
+
+    title= " ";
+    originalTitle= " ";
+
+    if (type == "movies") {
+      title = movie.title,
+      originalTitle = movie.original_title;
+    } else {
+      title = movie.name,
+      originalTitle = movie.original_name;
+    };
+
+    var context = {
+      type: type,
+      title: title,
+      orgtitle: originalTitle,
+      lang: getFlag(movie.original_language),
+      // lang: movie.original_language,
+      voto: getStarFromRates(movie.vote_average),
+      // voto: movie.vote_average,
+      // img: "<img src='" + movie.poster_path + "' >"
+      img : getPosterImg(movie.poster_path)
+    };
+
+    var html = template(context);
+
+    obj.append(html);
+  };
+
+};
+
 
 });
