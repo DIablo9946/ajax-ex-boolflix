@@ -157,7 +157,7 @@ function getPosterImg(url){
   // https://www.image.tmdb.org/t/p/w185/
   var imgTag = "";
   if (url){
-    imgTag = "<img src='" + posterImg + url + "'>"
+    imgTag = "<img src='" + posterImg + url + "'class='poster'>"
   } else {
 
   }
